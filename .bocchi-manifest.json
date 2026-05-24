@@ -1,7 +1,7 @@
 {
-  "sessionId": "c5e64730-16ed-4a26-96bc-d22d5620621f",
-  "fingerprint": "fd412a6c47e1b400fa3374637c633f8a56a7ddd145e68303dbafef5b5554523c",
-  "generatedAt": "2026-05-24T16:26:32.866942+00:00",
+  "sessionId": "4a52378f-7494-414e-a1ad-6fc5dfa0bd77",
+  "fingerprint": "8839ae7cb5058cb037fc6d436e0c4b4944b02728a1dbbd844b80efba163c6294",
+  "generatedAt": "2026-05-24T17:07:53.675475+00:00",
   "bocchiVersion": "1.0.0+ebff3de8d3cdfda59861f507dd02c1a1f6fda9a5",
   "themeId": "default-static",
   "environment": "production",
@@ -18,24 +18,32 @@
       "path": "/404.html",
       "kind": "ThemeOutput",
       "contentType": "text/html; charset=utf-8",
-      "sizeBytes": 7803,
-      "sha256": "940b98961658d7c841d6a2c2868b4bad474f5567f0c4c4be2e695f521d5c3f76",
+      "sizeBytes": 10563,
+      "sha256": "683b9039106221b7535e96f262f10774c7e37e093263a2944b8bce4f5b980d2d",
+      "producedBy": "CollectThemeOutputStage"
+    },
+    {
+      "path": "/about/index.html",
+      "kind": "ThemeOutput",
+      "contentType": "text/html; charset=utf-8",
+      "sizeBytes": 10577,
+      "sha256": "0236e6b4dffbb32d350318e8eb22f70d913c644aa5c93bdceea8d07fdb88e736",
       "producedBy": "CollectThemeOutputStage"
     },
     {
       "path": "/assets/app.css",
       "kind": "ThemeOutput",
       "contentType": "text/css; charset=utf-8",
-      "sizeBytes": 17963,
-      "sha256": "dd436d1796cae31e432e90981e9318669f85c79941b6c063473bba3fac27a836",
+      "sizeBytes": 18081,
+      "sha256": "ee65f791d78106fead6e1b3919644f5615886cabb909cb84a24ca6cfbcf0358c",
       "producedBy": "CollectThemeOutputStage"
     },
     {
       "path": "/assets/app.js",
       "kind": "ThemeOutput",
       "contentType": "text/javascript; charset=utf-8",
-      "sizeBytes": 8722,
-      "sha256": "7466dc4a1df5705f7d8be49a3aad64f483a5c86de7acfc51ad57302a93669a96",
+      "sizeBytes": 10833,
+      "sha256": "aed72357e296f3dc215221712ca40131ccff63b3dcdc78323d1edb7dc2eecdd7",
       "producedBy": "CollectThemeOutputStage"
     },
     {
@@ -50,112 +58,128 @@
       "path": "/build-context.json",
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
-      "sizeBytes": 622,
-      "sha256": "9ecb6e95cd672e7cc72e8b82c69560754685a6ade3934c4b6c079fe08ea82a37",
+      "sizeBytes": 620,
+      "sha256": "c736e5ac094ece7048783e4047c10404b0a80ad3681e5e38d600c993559c4988",
       "producedBy": "WriteThemeInputStage"
     },
     {
       "path": "/feed.xml",
       "kind": "SiteArtifact",
       "contentType": "application/atom+xml; charset=utf-8",
-      "sizeBytes": 542,
-      "sha256": "2655e40c410da7e02b046705ef227cfbfb5178de6792e88c2b8fddb1534e0227",
+      "sizeBytes": 4431,
+      "sha256": "5793d1209a72c6c8f152d7108a92d6c2d2b37a46453f267d6f230233233e9d3e",
       "producedBy": "WriteSiteArtifactsStage"
     },
     {
       "path": "/friends.json",
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
-      "sizeBytes": 157,
-      "sha256": "d38826bac9333062eb93d375efbba10d5e70be7ec30661ff1c7c7d0fba23074c",
+      "sizeBytes": 156,
+      "sha256": "3660ba517ac105543841f70a1b4a2d52bfd3a5e271179eab4894394ef459b0ec",
       "producedBy": "WriteThemeInputStage"
     },
     {
       "path": "/friends/index.html",
       "kind": "ThemeOutput",
       "contentType": "text/html; charset=utf-8",
-      "sizeBytes": 8031,
-      "sha256": "a17856f61215d3e3d12532873e984aa5028383d266d253c26ff9aa34d431457d",
+      "sizeBytes": 10797,
+      "sha256": "1a71ea98e4aa21b18388146ab626802a6f0ed25b9c7a3e9c1171c95b3a6f59db",
       "producedBy": "CollectThemeOutputStage"
     },
     {
       "path": "/index.html",
       "kind": "ThemeOutput",
       "contentType": "text/html; charset=utf-8",
-      "sizeBytes": 10844,
-      "sha256": "6061f16a54d2a694afd3abb48abd485a964a4b93032ece1fc9f16b106086de16",
+      "sizeBytes": 15145,
+      "sha256": "4f65adf7050667c91e09a4847cf435e27b10c0fa1fe5cb54028a4663e650ba15",
       "producedBy": "CollectThemeOutputStage"
     },
     {
       "path": "/navigation.json",
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
-      "sizeBytes": 1541,
-      "sha256": "6a8eeb667b8e47e850042e1f85c73b97fdda815f8c6e442e4875feed0677b934",
+      "sizeBytes": 1938,
+      "sha256": "291edb9790bf3e107b0bc04434b4b0dd7948b7f8aa7bafcbd3b0cbc068d55ae3",
       "producedBy": "WriteThemeInputStage"
     },
     {
       "path": "/notes.json",
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
-      "sizeBytes": 718,
-      "sha256": "67c11e11bc17d2ead7ea7d6affae8b61f1893fe47ccec7e619559caa393862af",
+      "sizeBytes": 717,
+      "sha256": "6ae5fddf02aeeb4bc43b82585d45a0f3a34e26d28c2439b5e597289dede1926a",
       "producedBy": "WriteThemeInputStage"
     },
     {
       "path": "/notes/2026/index.html",
       "kind": "ThemeOutput",
       "contentType": "text/html; charset=utf-8",
-      "sizeBytes": 8759,
-      "sha256": "c3d8756ef1269b2a4ef059fbac22a3a31b17d29f0acf1345b362c1046cbd8072",
+      "sizeBytes": 11531,
+      "sha256": "225b19a5f175f612a68eaf27267234af640ade822e953f7834bc36d7c1bbc55e",
       "producedBy": "CollectThemeOutputStage"
     },
     {
       "path": "/notes/index.html",
       "kind": "ThemeOutput",
       "contentType": "text/html; charset=utf-8",
-      "sizeBytes": 8728,
-      "sha256": "36155644718d05684bb575074c2b4ef09cf41cc6b3030a59c6227728a499be95",
+      "sizeBytes": 11494,
+      "sha256": "c8919b17f1d9a5b2b42dcf80bcb39d7c684d2178b906db5b6ee833d00857431b",
       "producedBy": "CollectThemeOutputStage"
     },
     {
       "path": "/pages.json",
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
-      "sizeBytes": 155,
-      "sha256": "2133769a528a0a8aa1f27cbc4d4777eee43c546722617676ddbebf5442216d00",
+      "sizeBytes": 965,
+      "sha256": "9d5173bdc658d6dfee0964de65580ed74b377702714122585536af3c0dec7fca",
       "producedBy": "WriteThemeInputStage"
     },
     {
       "path": "/photos.json",
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
-      "sizeBytes": 156,
-      "sha256": "ba5cc9b3b6e3cba28f62ce66195df95e91adc4e59b574a134cd157212121d0a5",
+      "sizeBytes": 155,
+      "sha256": "6bb5a639ac60ec57440596b4a8a42cdd5775b59081f3662b9722d2bb7c10a6b5",
       "producedBy": "WriteThemeInputStage"
     },
     {
       "path": "/post-categories.json",
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
-      "sizeBytes": 165,
-      "sha256": "2e1e11aa5781c5285ed44e37dbf778dfdc241a26ff076ee1e1ee38c9724d2842",
+      "sizeBytes": 164,
+      "sha256": "e05e2677a1ea801c0f2c521635cdf5909f1d3c53af9dfa4c5217d730696addcb",
       "producedBy": "WriteThemeInputStage"
     },
     {
       "path": "/posts.json",
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
-      "sizeBytes": 155,
-      "sha256": "9fe3466377ab412acd2f9b94ea3e762be7b96fb0c2e6c0737bddad26bfc5f493",
+      "sizeBytes": 5297,
+      "sha256": "5acbfea214e79897de1d80e8abe6d5a7aee581201adf1ce52b36b53e94e3454d",
       "producedBy": "WriteThemeInputStage"
+    },
+    {
+      "path": "/posts/2026/hello-blog-desu/index.html",
+      "kind": "ThemeOutput",
+      "contentType": "text/html; charset=utf-8",
+      "sizeBytes": 13128,
+      "sha256": "2ef5e7382090f8d4525efd29301d68484b1fb5949c87292d429f808080fbc8ac",
+      "producedBy": "CollectThemeOutputStage"
+    },
+    {
+      "path": "/posts/2026/second-post/index.html",
+      "kind": "ThemeOutput",
+      "contentType": "text/html; charset=utf-8",
+      "sizeBytes": 11117,
+      "sha256": "9c219c772e0af928a9180caf278aef5fdfd879bcd8d66745c5e5110598c0d20e",
+      "producedBy": "CollectThemeOutputStage"
     },
     {
       "path": "/posts/index.html",
       "kind": "ThemeOutput",
       "contentType": "text/html; charset=utf-8",
-      "sizeBytes": 8328,
-      "sha256": "ca553d9affabac1e1d4e696186b893d0829662b985410599d51a02c075700b13",
+      "sizeBytes": 11467,
+      "sha256": "5f0677bdd836b98d36b4120b8eb6ee83e62151ff6b01a8a4da541894dbf77a27",
       "producedBy": "CollectThemeOutputStage"
     },
     {
@@ -170,40 +194,56 @@
       "path": "/site.json",
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
-      "sizeBytes": 597,
-      "sha256": "dcb649e246591b7ed98d1e1f76b91572f5737924ceebd0af8d1469160677cb47",
+      "sizeBytes": 596,
+      "sha256": "f05e468cdfd1281677f27732b2f84c5c42d3a27bf4400f2e3a4a6e842c84c991",
       "producedBy": "WriteThemeInputStage"
     },
     {
       "path": "/sitemap.xml",
       "kind": "SiteArtifact",
       "contentType": "application/xml; charset=utf-8",
-      "sizeBytes": 186,
-      "sha256": "ccea6b6056c2fe5830ba8676e7110d69d9993421f1a38f75ecb940567d2dcd0b",
+      "sizeBytes": 784,
+      "sha256": "87e54a5e6b706099fb73c67e8f20034a291f93bb3cd3c203d095071e2b31390a",
       "producedBy": "WriteSiteArtifactsStage"
     },
     {
       "path": "/theme-context.json",
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
-      "sizeBytes": 13549,
-      "sha256": "951c4ba8a4826edc35731e868c134ae33a0374b869e65686d797d77f24600aba",
+      "sizeBytes": 13974,
+      "sha256": "94a8ae650f1b285ee1c488c23a55b3c518b6bc31887a3d74fa06be1c6738cf64",
       "producedBy": "WriteThemeInputStage"
     },
     {
       "path": "/works.json",
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
-      "sizeBytes": 155,
-      "sha256": "7267f74c409501b5c79ef934f1996b62afe3c9108ac1bd2065aec8d7fa83d8c3",
+      "sizeBytes": 2082,
+      "sha256": "ba48c136b323f574bbfb067934c82914735ce4493e5cee25659bd59903e3cfe7",
       "producedBy": "WriteThemeInputStage"
+    },
+    {
+      "path": "/works/2026/作品/index.html",
+      "kind": "ThemeOutput",
+      "contentType": "text/html; charset=utf-8",
+      "sizeBytes": 11139,
+      "sha256": "748dfd28c3a67346b14dfd20ccf98526c3447af4ef8f422f6300a4ba6bf867ef",
+      "producedBy": "CollectThemeOutputStage"
+    },
+    {
+      "path": "/works/2026/烫烫烫/index.html",
+      "kind": "ThemeOutput",
+      "contentType": "text/html; charset=utf-8",
+      "sizeBytes": 11079,
+      "sha256": "47abf51cd63914bf0bfc1d443c8b6aa013bd633e0b93aae826e37c2ca11bd1bf",
+      "producedBy": "CollectThemeOutputStage"
     },
     {
       "path": "/works/index.html",
       "kind": "ThemeOutput",
       "contentType": "text/html; charset=utf-8",
-      "sizeBytes": 8300,
-      "sha256": "de194f4004e4ed853d38f5d6a89358152fe80d501e73542dab7568ac5925bb3e",
+      "sizeBytes": 11736,
+      "sha256": "a123ae8a7a2fa60b648db03dc5e4cf5a5e4487a52688b6f4a747336a6c17502f",
       "producedBy": "CollectThemeOutputStage"
     }
   ]

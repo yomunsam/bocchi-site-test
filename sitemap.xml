@@ -3,4 +3,21 @@
   <url>
     <loc>https://yomunsam.github.io/bocchi-site-test/</loc>
   </url>
+  <url>
+    <loc>https://yomunsam.github.io/bocchi-site-test/about/</loc>
+  </url>
+  <url>
+    <loc>https://yomunsam.github.io/bocchi-site-test/posts/2026/second-post/</loc>
+    <lastmod>2026-05-24T17:06:10Z</lastmod>
+  </url>
+  <url>
+    <loc>https://yomunsam.github.io/bocchi-site-test/posts/2026/hello-blog-desu/</loc>
+    <lastmod>2026-05-24T17:01:21Z</lastmod>
+  </url>
+  <url>
+    <loc>https://yomunsam.github.io/bocchi-site-test/works/2026/%E4%BD%9C%E5%93%81/</loc>
+  </url>
+  <url>
+    <loc>https://yomunsam.github.io/bocchi-site-test/works/2026/%E7%83%AB%E7%83%AB%E7%83%AB/</loc>
+  </url>
 </urlset>
