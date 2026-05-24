@@ -1,7 +1,7 @@
 {
-  "sessionId": "75ba2eb5-8736-4cf9-8f72-7b270580db6f",
-  "fingerprint": "4777a55f1809528731cceca4d61e5125a47c3e7afee31db72de3b4ce260a39cf",
-  "generatedAt": "2026-05-24T15:59:24.144365+00:00",
+  "sessionId": "3d98224d-c6ef-4c8e-b8e7-7bafe99499f3",
+  "fingerprint": "c7f3e6b6524f3627d7c4640d54be31be3a9e14d13e908d109d870ef138a0ebdc",
+  "generatedAt": "2026-05-24T16:03:37.518593+00:00",
   "bocchiVersion": "1.0.0+9a3e66ea8965e575e06fbb81f011cc7dd166fc53",
   "themeId": "default-static",
   "environment": "production",
@@ -50,16 +50,16 @@
       "path": "/build-context.json",
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
-      "sizeBytes": 595,
-      "sha256": "2f5e0ba143d74c7744edf06dbd2f2eec291e7deb48bcf72b86b0eb9848f0648d",
+      "sizeBytes": 622,
+      "sha256": "32b4f118333e410fafd557bbf8cc5bc07a629e43e69d3c96d87c8b99fa89b50e",
       "producedBy": "WriteThemeInputStage"
     },
     {
       "path": "/feed.xml",
       "kind": "SiteArtifact",
       "contentType": "application/atom+xml; charset=utf-8",
-      "sizeBytes": 461,
-      "sha256": "cce7fb282e6be1526f0774ccc709eb6075f0a570980ffb33270e693f98d88ccf",
+      "sizeBytes": 542,
+      "sha256": "5690b892f7e4f34929f454143048fb030ff9b6f297330a292d09b2260f242098",
       "producedBy": "WriteSiteArtifactsStage"
     },
     {
@@ -67,7 +67,7 @@
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
       "sizeBytes": 157,
-      "sha256": "7a581ee4eb38b88cbcf94db1692d86eab3b5ada750eb110cab4560c5ad70a5a8",
+      "sha256": "aeb7efda5bc00be38732b627eb21d6238261d741a7ee8c77f55bfa91cdd09240",
       "producedBy": "WriteThemeInputStage"
     },
     {
@@ -91,7 +91,7 @@
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
       "sizeBytes": 1541,
-      "sha256": "ba5378163e699f8cde7b0348b0c0d50e73c0d993b70ee7d526f8787cdd9d1e71",
+      "sha256": "79a4c85e911a0ae1db636dc80288ddb3383bc57c47be451ef357bb80a7608766",
       "producedBy": "WriteThemeInputStage"
     },
     {
@@ -99,7 +99,7 @@
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
       "sizeBytes": 718,
-      "sha256": "fdc3c976cca569ef01edc6d419d0685b2c4c85fe15a87b85c2295f6e3b4904cb",
+      "sha256": "7f51ae323855b2d36665bec780b914bc8b1929bf1c14449cf825e2be5ac43215",
       "producedBy": "WriteThemeInputStage"
     },
     {
@@ -123,7 +123,7 @@
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
       "sizeBytes": 155,
-      "sha256": "25e263fd1d4f2cff581a920b7a087d09578d5c1fd412e316c16605cb89ba705d",
+      "sha256": "b6f4e51f67224d94b36b472a8dc3a9dfcb1f9e36b28536be34470a1acd6f3fd4",
       "producedBy": "WriteThemeInputStage"
     },
     {
@@ -131,7 +131,7 @@
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
       "sizeBytes": 156,
-      "sha256": "dd1d9791b54987fec2097bc46412c89bf8cd0957e67b8810c1e17747214798a5",
+      "sha256": "75b1a7f2d59a88e43e9f598a40700e66515cab0b4d09fff6efba235ada093c8b",
       "producedBy": "WriteThemeInputStage"
     },
     {
@@ -139,7 +139,7 @@
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
       "sizeBytes": 165,
-      "sha256": "e6970a9432b56dd4f6db7bdd19b5bfa1841c45d641b3c5a9729f0caa957932bb",
+      "sha256": "b9edcfe8e69e99cd11dca2c4813e7c513b9cf01571aff3d2f848af5ea2d3c991",
       "producedBy": "WriteThemeInputStage"
     },
     {
@@ -147,7 +147,7 @@
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
       "sizeBytes": 155,
-      "sha256": "21277b0e3a8f646bbfe5a6c18dacdfa86843433eef50f868c06641b377548d0a",
+      "sha256": "416611dad737f3625b887b145e72625d504dac3e335e027d4e8fef0a2afd53cf",
       "producedBy": "WriteThemeInputStage"
     },
     {
@@ -162,32 +162,32 @@
       "path": "/robots.txt",
       "kind": "SiteArtifact",
       "contentType": "text/plain; charset=utf-8",
-      "sizeBytes": 61,
-      "sha256": "9b57054b344709a846326c0a7e5a2306fdf7623ffd936f0ae5d12f97ab73c53c",
+      "sizeBytes": 88,
+      "sha256": "30f00879b8b31ce961416906de7d3fce04b10bcba7f7daa8c3c60529a3f57ef0",
       "producedBy": "WriteSiteArtifactsStage"
     },
     {
       "path": "/site.json",
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
-      "sizeBytes": 570,
-      "sha256": "9bade912d250ec3a1c396447e5f026b3d8ba0a64c1718dad862e2129de9efc16",
+      "sizeBytes": 597,
+      "sha256": "64fd8e2bfa607e1c650a39ef96b0157884945e2d135caf6e9744652c0bb5f22d",
       "producedBy": "WriteThemeInputStage"
     },
     {
       "path": "/sitemap.xml",
       "kind": "SiteArtifact",
       "contentType": "application/xml; charset=utf-8",
-      "sizeBytes": 159,
-      "sha256": "ab89c6234aec992c45bad169fc264e28e315fa5731948bb1720ee3de043364c1",
+      "sizeBytes": 186,
+      "sha256": "ccea6b6056c2fe5830ba8676e7110d69d9993421f1a38f75ecb940567d2dcd0b",
       "producedBy": "WriteSiteArtifactsStage"
     },
     {
       "path": "/theme-context.json",
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
-      "sizeBytes": 13522,
-      "sha256": "c8487a0b556371cc36fe1a7e0997cddb3a65ba21e65908d64496cc56037d6ad0",
+      "sizeBytes": 13549,
+      "sha256": "6850e96356cce12a7461bed1bd4d088d3964e9a105659f8ba9bc876963b2442c",
       "producedBy": "WriteThemeInputStage"
     },
     {
@@ -195,7 +195,7 @@
       "kind": "ThemeInput",
       "contentType": "application/json; charset=utf-8",
       "sizeBytes": 155,
-      "sha256": "cad7a0e97f5b6318eede7a99d11e53d9c5e1e3339f386e5896aa1bd50b478fc7",
+      "sha256": "d27317ecdc7d52312d764bebd2cf8aa1de8828dd47aff50f5b2e89a2791e27b4",
       "producedBy": "WriteThemeInputStage"
     },
     {
