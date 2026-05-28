@@ -44,6 +44,46 @@ const getLanguageDisplayName = (code) => {
   return language?.nativeName || language?.englishName || code;
 };
 
+const readJsonAttribute = (element, attribute) => {
+  const raw = element.getAttribute(attribute);
+  if (!raw) return null;
+  try { return JSON.parse(raw); } catch { return null; }
+};
+
+const pageLanguageHrefs = readJsonAttribute(document.body, "data-bocchi-page-hrefs");
+
+const findByLanguage = (items, language) => {
+  if (!Array.isArray(items) || typeof language !== "string") return null;
+  const normalized = language.toLowerCase();
+  return items.find((item) => typeof item?.language === "string" && item.language.toLowerCase() === normalized) ?? null;
+};
+
+const findMapValueByLanguage = (map, language) => {
+  if (!map || typeof map !== "object" || typeof language !== "string") return null;
+  const normalized = language.toLowerCase();
+  const key = Object.keys(map).find((candidate) => candidate.toLowerCase() === normalized);
+  return key && typeof map[key] === "string" ? map[key] : null;
+};
+
+const toRelativeSiteHref = (url) => {
+  if (typeof url !== "string" || !url.startsWith("/") || url.startsWith("//")) return url;
+
+  const match = /^([^?#]*)(.*)$/.exec(url);
+  const targetPath = match?.[1] || "/";
+  const suffix = match?.[2] || "";
+  const currentPath = window.location?.pathname || "/";
+  const currentDirectory = currentPath.endsWith("/") ? currentPath : currentPath.replace(/[^/]*$/, "");
+  const fromParts = currentDirectory.split("/").filter(Boolean);
+  const toParts = targetPath.split("/").filter(Boolean);
+  let common = 0;
+  while (common < fromParts.length && common < toParts.length && fromParts[common] === toParts[common]) common += 1;
+
+  let relative = "../".repeat(Math.max(0, fromParts.length - common)) + toParts.slice(common).join("/");
+  if (targetPath.endsWith("/") && relative && !relative.endsWith("/")) relative += "/";
+  if (!relative) relative = "./";
+  return relative + suffix;
+};
+
 const normalizeInlineColor = (value) => {
   if (typeof value !== "string") return null;
   const trimmed = value.trim();
@@ -163,6 +203,107 @@ const syncAppearanceControls = () => {
   });
 };
 
+const syncNavigationLinks = () => {
+  document.querySelectorAll("[data-bocchi-nav-hrefs]").forEach((link) => {
+    const languageHrefs = readJsonAttribute(link, "data-bocchi-nav-hrefs");
+    const href = findMapValueByLanguage(languageHrefs, currentLanguage)
+      ?? findMapValueByLanguage(languageHrefs, primaryLanguage);
+    if (href) link.setAttribute("href", toRelativeSiteHref(href));
+  });
+};
+
+const updateContentText = (rootElement, selector, value) => {
+  if (typeof value !== "string") return;
+  rootElement.querySelectorAll(selector).forEach((element) => {
+    element.textContent = value;
+  });
+};
+
+const syncContentVariants = () => {
+  document.querySelectorAll("[data-bocchi-content-variants]").forEach((element) => {
+    const variants = readJsonAttribute(element, "data-bocchi-content-variants");
+    const variant = findByLanguage(variants, currentLanguage)
+      ?? findByLanguage(variants, primaryLanguage)
+      ?? (Array.isArray(variants) ? variants[0] : null);
+    if (!variant || typeof variant !== "object") return;
+
+    const link = element.matches("a[href]") ? element : element.querySelector("a[href]");
+    if (link && typeof variant.url === "string") link.setAttribute("href", toRelativeSiteHref(variant.url));
+    updateContentText(element, "[data-bocchi-content-title]", variant.title);
+    updateContentText(element, "[data-bocchi-content-summary]", variant.summary);
+    updateContentText(element, "[data-bocchi-content-meta]", variant.meta);
+    updateContentText(element, "[data-bocchi-content-year-month]", variant.yearMonth);
+  });
+};
+
+const syncArticleTimes = () => {
+  document.querySelectorAll("bocchi-time[data-bocchi-article-time]").forEach((element) => {
+    if (typeof element.renderArticleTime === "function") element.renderArticleTime();
+  });
+};
+
+const currentPageLanguageHref = (language) => findMapValueByLanguage(pageLanguageHrefs, language);
+
+const hasPageLanguageContext = () => pageLanguageHrefs && typeof pageLanguageHrefs === "object" && Object.keys(pageLanguageHrefs).length > 0;
+
+const resolveRequestedLanguage = (language) => {
+  const requestedLanguage = normalizeLanguage(language);
+  if (!hasPageLanguageContext() || currentPageLanguageHref(requestedLanguage)) {
+    return {
+      requestedLanguage,
+      targetLanguage: requestedLanguage,
+      fallbackToPrimary: false,
+    };
+  }
+
+  return {
+    requestedLanguage,
+    targetLanguage: normalizeLanguage(primaryLanguage),
+    fallbackToPrimary: true,
+  };
+};
+
+const navigateToLanguagePage = (language, replace = false) => {
+  const href = currentPageLanguageHref(language);
+  if (!href) return false;
+
+  const relativeHref = toRelativeSiteHref(href);
+  const targetUrl = new URL(relativeHref, window.location.href);
+  if (targetUrl.pathname === window.location.pathname && targetUrl.search === window.location.search) return false;
+
+  if (replace) {
+    window.location.replace(relativeHref);
+  } else {
+    window.location.assign(relativeHref);
+  }
+  return true;
+};
+
+const dispatchLanguageChange = (language, reason, requestedLanguage = language, fallbackToPrimary = false) => {
+  const href = currentPageLanguageHref(language);
+  return window.dispatchEvent(new CustomEvent("bocchi:languagechange", {
+    cancelable: true,
+    detail: {
+      from: currentLanguage,
+      to: language,
+      requested: requestedLanguage,
+      reason,
+      fallbackToPrimary,
+      hasPageVariant: Boolean(href),
+      pageHref: href ?? null,
+    },
+  }));
+};
+
+const requestLanguage = (language, { persist = true, navigate = true, replace = false, reason = "user" } = {}) => {
+  const { requestedLanguage, targetLanguage, fallbackToPrimary } = resolveRequestedLanguage(language);
+  if (!dispatchLanguageChange(targetLanguage, reason, requestedLanguage, fallbackToPrimary)) return false;
+  if (persist) writeStorage(languageStorageKey, targetLanguage);
+  if (navigate && navigateToLanguagePage(targetLanguage, replace)) return true;
+  applyLanguage(targetLanguage, false);
+  return true;
+};
+
 const applyLanguage = (language, persist = true) => {
   currentLanguage = normalizeLanguage(language);
   root.lang = currentLanguage;
@@ -181,6 +322,9 @@ const applyLanguage = (language, persist = true) => {
 
   syncLanguageControls();
   syncAppearanceControls();
+  syncNavigationLinks();
+  syncContentVariants();
+  syncArticleTimes();
 };
 
 const applyAppearance = (mode, persist = true) => {
@@ -225,8 +369,20 @@ document.addEventListener("click", (event) => {
   const languageOption = target.closest("[data-bocchi-language-option]");
   if (languageOption instanceof HTMLElement) {
     event.preventDefault();
-    applyLanguage(languageOption.getAttribute("data-bocchi-language-option"));
+    requestLanguage(languageOption.getAttribute("data-bocchi-language-option"));
     closeOwnMenu(languageOption);
+    return;
+  }
+
+  const contentLanguageLink = target.closest("a[data-bocchi-language-link]");
+  if (contentLanguageLink instanceof HTMLAnchorElement) {
+    const nextLanguage = normalizeLanguage(contentLanguageLink.getAttribute("data-bocchi-language-link"));
+    if (!dispatchLanguageChange(nextLanguage, "content-link")) {
+      event.preventDefault();
+      return;
+    }
+
+    writeStorage(languageStorageKey, nextLanguage);
     return;
   }
 
@@ -254,7 +410,10 @@ if (appearanceQuery?.addEventListener) {
   appearanceQuery?.addListener?.(syncAutoAppearance);
 }
 
-applyLanguage(currentLanguage, false);
+const initialPageLanguage = normalizeLanguage(i18n.currentLanguage ?? root.lang);
+const initialNavigationStarted = currentLanguage !== initialPageLanguage
+  && requestLanguage(currentLanguage, { persist: false, replace: true, reason: "restore" });
+if (!initialNavigationStarted) applyLanguage(currentLanguage, false);
 applyAppearance(currentAppearance, false);
 
 if (!customElements.get("bocchi-time")) {
@@ -262,6 +421,21 @@ if (!customElements.get("bocchi-time")) {
     connectedCallback() {
       if (this.dataset.ready === "true") return;
       this.dataset.ready = "true";
+      if (this.hasAttribute("data-bocchi-article-time")) {
+        this.initializeArticleTime();
+        return;
+      }
+
+      this.initializeLegacyTime();
+    }
+
+    disconnectedCallback() {
+      if (this.articleTimeDocumentClick) {
+        document.removeEventListener("click", this.articleTimeDocumentClick);
+      }
+    }
+
+    initializeLegacyTime() {
       const value = this.getAttribute("datetime");
       const authorZone = this.getAttribute("author-time-zone");
       const date = value ? new Date(value) : null;
@@ -284,6 +458,166 @@ if (!customElements.get("bocchi-time")) {
       badge.textContent = visitorZone.replace(/_/g, " ");
       badge.setAttribute("aria-hidden", "true");
       this.append(badge);
+    }
+
+    initializeArticleTime() {
+      this.articleTimePayload = readJsonAttribute(this, "data-bocchi-time");
+      if (!this.articleTimePayload?.written) return;
+
+      this.articleTimeLabel = this.querySelector("[data-bocchi-time-label]");
+      this.articleTimeValue = this.querySelector("[data-bocchi-time-value]");
+      this.articleTimeOffset = this.querySelector("[data-bocchi-time-offset]");
+      this.articleTimeActiveKind = this.articleTimePayload.activeKind || "written";
+      this.articleTimePinned = false;
+      this.articleTimePopover = document.createElement("span");
+      this.articleTimePopover.className = "bocchi-time__popover";
+      this.articleTimePopover.setAttribute("role", "tooltip");
+      this.append(this.articleTimePopover);
+      this.renderArticleTime();
+
+      this.addEventListener("mouseenter", () => this.setArticleTimeOpen(true));
+      this.addEventListener("mouseleave", () => {
+        if (!this.articleTimePinned) this.setArticleTimeOpen(false);
+      });
+      this.addEventListener("focus", () => this.setArticleTimeOpen(true));
+      this.addEventListener("blur", () => {
+        if (!this.articleTimePinned) this.setArticleTimeOpen(false);
+      });
+      this.addEventListener("click", (event) => {
+        event.stopPropagation();
+        this.toggleArticleTime();
+        this.articleTimePinned = true;
+        this.setArticleTimeOpen(true);
+      });
+      this.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          this.toggleArticleTime();
+          this.articleTimePinned = true;
+          this.setArticleTimeOpen(true);
+        } else if (event.key === "Escape") {
+          this.articleTimePinned = false;
+          this.setArticleTimeOpen(false);
+        }
+      });
+      this.articleTimeDocumentClick = (event) => {
+        const target = event.target instanceof Node ? event.target : null;
+        if (!target || !this.contains(target)) {
+          this.articleTimePinned = false;
+          this.setArticleTimeOpen(false);
+        }
+      };
+      document.addEventListener("click", this.articleTimeDocumentClick);
+    }
+
+    toggleArticleTime() {
+      if (!this.articleTimePayload?.canToggle) return;
+      this.articleTimeActiveKind = this.articleTimeActiveKind === "updated" ? "written" : "updated";
+      this.renderArticleTime();
+    }
+
+    renderArticleTime() {
+      const entry = this.getArticleTimeEntry(this.articleTimeActiveKind);
+      if (!entry) return;
+
+      const label = resolveText(entry.labelKey) || entry.label || "";
+      this.dataset.bocchiTimeKind = entry.kind;
+      this.articleTimeLabel.textContent = label;
+      this.articleTimeLabel.setAttribute("data-bocchi-i18n", entry.labelKey);
+      this.articleTimeValue.textContent = entry.display;
+      this.articleTimeValue.setAttribute("datetime", entry.iso);
+      const timeZoneLabel = entry.timeZoneLabel || entry.offsetLabel || "";
+      this.articleTimeOffset.textContent = timeZoneLabel;
+      this.setAttribute("aria-label", `${label} ${entry.display} ${timeZoneLabel}`.trim());
+      this.renderArticleTimePopover(entry, label);
+    }
+
+    getArticleTimeEntry(kind) {
+      const entry = this.articleTimePayload?.[kind];
+      if (entry && typeof entry === "object") return entry;
+      return this.articleTimePayload?.written ?? null;
+    }
+
+    renderArticleTimePopover(entry, label) {
+      if (!this.articleTimePopover) return;
+      this.articleTimePopover.textContent = "";
+      this.articleTimePopover.append(
+        this.createArticleTimePopoverRow(
+          resolveText("content.time.authorTimeZone") || "",
+          entry.authorTimeZone || this.articleTimePayload.authorTimeZone || ""));
+
+      const reader = this.createReaderTime(entry);
+      if (reader) {
+        this.articleTimePopover.append(
+          this.createArticleTimePopoverRow(
+            `${label} ${resolveText("content.time.readerTime") || ""}`.trim(),
+            reader));
+      }
+    }
+
+    createArticleTimePopoverRow(label, value) {
+      const row = document.createElement("span");
+      row.className = "bocchi-time__popover-row";
+      const labelElement = document.createElement("span");
+      labelElement.className = "bocchi-time__popover-label";
+      labelElement.textContent = label;
+      const valueElement = document.createElement("strong");
+      valueElement.className = "bocchi-time__popover-value";
+      valueElement.textContent = value;
+      row.append(labelElement, valueElement);
+      return row;
+    }
+
+    createReaderTime(entry) {
+      const authorZone = entry.authorTimeZone || this.articleTimePayload.authorTimeZone;
+      const readerZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      if (!authorZone || !readerZone || authorZone === readerZone) return null;
+
+      const date = new Date(entry.iso);
+      if (Number.isNaN(date.getTime())) return null;
+
+      const authorParts = this.getTimeParts(date, authorZone);
+      const readerParts = this.getTimeParts(date, readerZone);
+      if (!authorParts || !readerParts) return null;
+
+      if (authorParts.year !== readerParts.year) {
+        return `${readerParts.year}-${readerParts.month}-${readerParts.day} ${readerParts.hour}:${readerParts.minute}`;
+      }
+
+      if (authorParts.month !== readerParts.month || authorParts.day !== readerParts.day) {
+        return `${readerParts.month}-${readerParts.day} ${readerParts.hour}:${readerParts.minute}`;
+      }
+
+      return `${readerParts.hour}:${readerParts.minute}`;
+    }
+
+    getTimeParts(date, timeZone) {
+      try {
+        const parts = new Intl.DateTimeFormat(undefined, {
+          timeZone,
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          hourCycle: "h23"
+        }).formatToParts(date);
+        const value = (type) => parts.find((part) => part.type === type)?.value;
+        return {
+          year: value("year"),
+          month: value("month"),
+          day: value("day"),
+          hour: value("hour"),
+          minute: value("minute")
+        };
+      } catch {
+        return null;
+      }
+    }
+
+    setArticleTimeOpen(open) {
+      this.toggleAttribute("data-bocchi-time-open", open);
+      this.setAttribute("aria-expanded", String(open));
     }
   });
 }
